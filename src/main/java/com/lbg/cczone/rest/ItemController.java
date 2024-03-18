@@ -56,4 +56,14 @@ public class ItemController {
 		return this.service.deleteItem(id);
 	}
 
+	@PatchMapping("/checkOut/{itemId}/{cartId}")
+	public ResponseEntity<Item> checkOut(@PathVariable int itemId, @PathVariable int cartId) {
+		return this.service.checkOut(itemId, cartId);
+	}
+
+	@PatchMapping("/checkIn/{itemId}")
+	public ResponseEntity<Item> checkIn(@PathVariable int itemId) {
+		return this.service.checkIn(itemId);
+	}
+
 }
