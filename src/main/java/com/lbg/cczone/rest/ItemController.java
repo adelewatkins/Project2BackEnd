@@ -35,11 +35,11 @@ public class ItemController {
 
 	}
 
-//	@GetMapping("/get/{id}")
-//	public ResponseEntity<Item> getItem(@PathVariable int id) {
-//		return this.service.getItem(id);
-//
-//	}
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Item> getItem(@PathVariable int id) {
+		return this.service.getItem(id);
+
+	}
 
 	@PostMapping("/create")
 	public ResponseEntity<Item> createItem(@RequestBody Item item) {

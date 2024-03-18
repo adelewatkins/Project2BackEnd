@@ -43,14 +43,14 @@ public class ItemService {
 
 	}
 
-//	public ResponseEntity<Item> getItem(int id) {
-//		Optional<Item> found = this.repo.findById(id);
-//		if (found.isEmpty()) {
-//			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
-//		}
-//		Item body = found.get();
-//		return ResponseEntity.ok(body);
-//	}
+	public ResponseEntity<Item> getItem(int id) {
+		Optional<Item> found = this.repo.findById(id);
+		if (found.isEmpty()) {
+			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+		}
+		Item body = found.get();
+		return ResponseEntity.ok(body);
+	}
 
 	public ResponseEntity<Item> createItem(Item item) {
 		Item created = this.repo.save(item);
