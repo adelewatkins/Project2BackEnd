@@ -41,7 +41,17 @@ public class CartTest {
 	@Test
 	@Order(1)
 	void getCartsTest() {
-		this.driver.get("http://localhost:3000/cart");
+
+		this.driver.get("http://localhost:3001/admin");
+//		this.driver.get("http://localhost:3000/cart");
+		WebElement userId = this.driver.findElement(By.id("formGroupEmail"));
+		userId.sendKeys("treesa");
+		WebElement password = this.driver.findElement(By.id("formGroupPassword"));
+		password.sendKeys("treesa");
+
+		WebElement submit = this.driver.findElement(By.cssSelector("body > div > div.card > form > button"));
+		this.driver.executeScript("arguments[0].scrollIntoView(true);", submit);
+		this.driver.executeScript("arguments[0].click();", submit);
 
 		WebElement createdCartBuyer = this.driver.findElement(
 				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(4) > div > div > div > div > h3"));
