@@ -19,9 +19,15 @@ public class ItemService {
 	private ItemRepo repo;
 	private CartRepo cartRepo;
 
-	public ItemService(ItemRepo repo) {
+//	public ItemService(ItemRepo repo) {
+//		super();
+//		this.repo = repo;
+//	}
+
+	public ItemService(ItemRepo repo, CartRepo cartRepo) {
 		super();
 		this.repo = repo;
+		this.cartRepo = cartRepo;
 	}
 
 	public List<ItemDTO> getItem() {
@@ -96,9 +102,9 @@ public class ItemService {
 
 		Item existing = toCheckOut.get();
 
-		if (existing.getCart() != null) {
-			return new ResponseEntity<Item>(HttpStatus.BAD_REQUEST);
-		}
+//		if (existing.getCart() != null) {
+//			return new ResponseEntity<Item>(HttpStatus.BAD_REQUEST);
+//		}
 
 		Optional<Cart> customer = this.cartRepo.findById(cartId);
 
@@ -106,6 +112,7 @@ public class ItemService {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
 
+//		existing.setCart(customer.get());
 		existing.setCart(customer.get());
 
 		Item updated = this.repo.save(existing);
@@ -129,5 +136,25 @@ public class ItemService {
 
 		return ResponseEntity.ok(checkedIn);
 	}
+
+//	public ResponseEntity<Item> removeFromCart(int itemId,int cartId) {
+//	Optional<Item> itemToRemove = this.repo.findById(itemId);
+//
+//		if (itemToRemove.isEmpty()) {
+//			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+//		}
+//
+//		Item existing = itemToRemove.get();
+//Optional<Cart> toUpdate=this.cartRepo.findById(cartId);
+//
+//if (toUpdate.isEmpty()) {
+//	return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
+//}
+//		existing.setCart(null);
+//
+//		Item checkedIn = this.repo.save(existing);
+//
+//		return ResponseEntity.ok(checkedIn);
+//	}
 
 }
