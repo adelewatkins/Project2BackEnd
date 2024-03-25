@@ -82,6 +82,16 @@ public class CartService {
 		if (cart.getAddress() != null) {
 			existing.setAddress(cart.getAddress());
 		}
+		if (cart.getItems() != null) {
+			existing.setItems(cart.getItems());
+		}
+
+		for (Item item : cart.getItems()) {
+			if (item.getId() != null || item.getItemName() != null || item.getItemPrice() != null
+					|| item.getItemQuantity() != null) {
+				existing.setItems(cart.getItems());
+			}
+		}
 
 		Cart updated = this.repo.save(existing);
 		return ResponseEntity.ok(updated);
