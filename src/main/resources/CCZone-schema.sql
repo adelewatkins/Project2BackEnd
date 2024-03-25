@@ -14,11 +14,13 @@ CREATE TABLE `admin`(
 
 CREATE TABLE `cart`(
 `id` INT PRIMARY KEY AUTO_INCREMENT,
+
 `buyer` VARCHAR(100),
 `user_id` VARCHAR(100),
 `password` VARCHAR(100),
 `tel` VARCHAR(100),
 `address` VARCHAR(100)
+
 );
 
 CREATE TABLE `item`(

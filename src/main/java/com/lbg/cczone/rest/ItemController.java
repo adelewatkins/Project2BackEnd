@@ -35,11 +35,11 @@ public class ItemController {
 
 	}
 
-//	@GetMapping("/get/{id}")
-//	public ResponseEntity<Item> getItem(@PathVariable int id) {
-//		return this.service.getItem(id);
-//
-//	}
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Item> getItem(@PathVariable int id) {
+		return this.service.getItem(id);
+
+	}
 
 	@PostMapping("/create")
 	public ResponseEntity<Item> createItem(@RequestBody Item item) {
@@ -54,6 +54,16 @@ public class ItemController {
 	@DeleteMapping("delete/{id}")
 	public boolean deleteItem(@PathVariable int id) {
 		return this.service.deleteItem(id);
+	}
+
+	@PatchMapping("/checkOut/{itemId}/{cartId}")
+	public ResponseEntity<Item> checkOut(@PathVariable int itemId, @PathVariable int cartId) {
+		return this.service.checkOut(itemId, cartId);
+	}
+
+	@PatchMapping("/checkIn/{itemId}")
+	public ResponseEntity<Item> checkIn(@PathVariable int itemId) {
+		return this.service.checkIn(itemId);
 	}
 
 }
