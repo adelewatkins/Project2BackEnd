@@ -54,6 +54,7 @@ public class CartService {
 	public ResponseEntity<Object> createCart(Cart cart) {
 
 		Cart created = this.repo.save(cart);
+
 		return new ResponseEntity<Object>(created, HttpStatus.CREATED);
 	}
 
@@ -65,6 +66,21 @@ public class CartService {
 		Cart existing = found.get();
 		if (cart.getItems() != null) {
 			existing.setItems(cart.getItems());
+		}
+		if (cart.getBuyer() != null) {
+			existing.setBuyer(cart.getBuyer());
+		}
+		if (cart.getUserId() != null) {
+			existing.setUserId(cart.getUserId());
+		}
+		if (cart.getPassword() != null) {
+			existing.setPassword(cart.getPassword());
+		}
+		if (cart.getTel() != null) {
+			existing.setTel(cart.getTel());
+		}
+		if (cart.getAddress() != null) {
+			existing.setAddress(cart.getAddress());
 		}
 
 		Cart updated = this.repo.save(existing);

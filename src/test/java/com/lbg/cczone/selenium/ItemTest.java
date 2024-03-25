@@ -13,7 +13,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -78,16 +77,20 @@ public class ItemTest {
 
 		WebElement Delete = this.driver.findElement(
 				By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(1) > button:nth-child(4)"));
+
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", Delete);
 		this.driver.executeScript("arguments[0].click();", Delete);
+		driver.switchTo().alert().accept();
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//		
-
-		wait.until(ExpectedConditions.invisibilityOf(Delete));
+//		wait.until(ExpectedConditions.invisibilityOf(Delete));
 		List<WebElement> items = this.driver
 				.findElements(By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(1) > div"));
 		Assertions.assertEquals(1, items.size());
 	}
+//	@AfterEach
+//	void tearDown() {
+//		this.driver.quit();
+//	}
 
 }
