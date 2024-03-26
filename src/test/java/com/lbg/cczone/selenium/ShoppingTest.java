@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.Duration;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -105,9 +106,10 @@ public class ShoppingTest {
 				.findElements(By.cssSelector("body > div > div:nth-child(3) > div:nth-child(5) > div > div > div"));
 		Assertions.assertEquals(0, carts.size());
 	}
-//	@AfterEach
-//	void tearDown() {
-//		this.driver.quit();
-//	}
+
+	@AfterEach
+	void tearDown() {
+		this.driver.quit();
+	}
 
 }

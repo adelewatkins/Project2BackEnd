@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.Duration;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -91,19 +92,29 @@ public class CartTest {
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", AddItem);
 		this.driver.executeScript("arguments[0].click();", AddItem);
 
-		WebElement newItemName = this.driver.findElement(By.id("itemName"));
-		newItemName.sendKeys("Biscuit");
+		WebElement Add = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div > div > div:nth-child(1) > button.btn.btn-danger.col"));
 
-		WebElement newItemPrice = this.driver.findElement(By.id("itemPrice"));
-		newItemPrice.sendKeys("4.50");
+		this.driver.executeScript("arguments[0].scrollIntoView(true);", Add);
+		this.driver.executeScript("arguments[0].click();", Add);
+		driver.switchTo().alert().accept();
 
-		WebElement newItemQuantity = this.driver.findElement(By.id("itemQuantity"));
-		newItemQuantity.sendKeys("5");
-
-		WebElement submit = this.driver.findElement(By.cssSelector("body > div > div:nth-child(3) > form > button"));
-
-		this.driver.executeScript("arguments[0].scrollIntoView(true);", submit);
-		this.driver.executeScript("arguments[0].click();", submit);
+//		WebElement newItemName = this.driver.findElement(By.id("itemName"));
+//		newItemName.sendKeys("Biscuit");
+//
+//		WebElement newItemPrice = this.driver.findElement(By.id("itemPrice"));
+//		newItemPrice.sendKeys("4.50");
+//
+//		WebElement newItemQuantity = this.driver.findElement(By.id("itemQuantity"));
+//		newItemQuantity.sendKeys("5");
+//
+//		WebElement submit = this.driver.findElement(By.cssSelector("body > div > div:nth-child(3) > form > button"));
+//
+//		this.driver.executeScript("arguments[0].scrollIntoView(true);", submit);
+//		this.driver.executeScript("arguments[0].click();", submit);
+		WebElement addedItem = this.driver.findElement(
+				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > p:nth-child(1)"));
+		assertEquals(true, addedItem.getText().contains("ID: 1"));
 
 	}
 
@@ -179,9 +190,10 @@ public class CartTest {
 		Assertions.assertEquals("QUANTITY: 2", newQuantity.getText());
 
 	}
-//	@AfterEach
-//	void tearDown() {
-//		this.driver.quit();
-//	}
+
+	@AfterEach
+	void tearDown() {
+		this.driver.quit();
+	}
 
 }
