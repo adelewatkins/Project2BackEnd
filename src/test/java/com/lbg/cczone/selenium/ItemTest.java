@@ -1,8 +1,11 @@
 package com.lbg.cczone.selenium;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.Duration;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -54,6 +57,10 @@ public class ItemTest {
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", submit);
 		this.driver.executeScript("arguments[0].click();", submit);
 
+		WebElement NewItem = this.driver.findElement(
+				By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(3) > div > p:nth-child(2)"));
+		Assertions.assertEquals("ITEM : Biscuit", NewItem.getText());
+
 	}
 
 	@Test
@@ -78,16 +85,51 @@ public class ItemTest {
 
 		WebElement Delete = this.driver.findElement(
 				By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(1) > button:nth-child(4)"));
+
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", Delete);
 		this.driver.executeScript("arguments[0].click();", Delete);
+		driver.switchTo().alert().accept();
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//		
-
-		wait.until(ExpectedConditions.invisibilityOf(Delete));
+//		wait.until(ExpectedConditions.invisibilityOf(Delete));
 		List<WebElement> items = this.driver
 				.findElements(By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(1) > div"));
 		Assertions.assertEquals(1, items.size());
+	}
+
+	@Test
+	@Order(4)
+	void checkInItemTest() {
+		this.driver.get("http://localhost:3000/cart");
+
+		WebElement Select = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div > div:nth-child(4) > div > div > div > div > div.card-text > button:nth-child(2)"));
+
+		this.driver.executeScript("arguments[0].scrollIntoView(true);", Select);
+		this.driver.executeScript("arguments[0].click();", Select);
+
+		WebElement Delete = this.driver.findElement(
+				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > button:nth-child(4)"));
+
+		this.driver.executeScript("arguments[0].scrollIntoView(true);", Delete);
+		this.driver.executeScript("arguments[0].click();", Delete);
+		driver.switchTo().alert().accept();
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+		wait.until(ExpectedConditions.invisibilityOf(Delete));
+		List<WebElement> items = this.driver
+				.findElements(By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > div"));
+		Assertions.assertEquals(0, items.size());
+		this.driver.get("http://localhost:3000/item");
+		WebElement CheckedInItem = this.driver
+				.findElement(By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(2) > div"));
+		assertEquals(true, CheckedInItem.getText().contains("ITEM : Cookies"));
+	}
+
+	@AfterEach
+	void tearDown() {
+		this.driver.quit();
 	}
 
 }
