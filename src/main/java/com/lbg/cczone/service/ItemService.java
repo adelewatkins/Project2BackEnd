@@ -42,6 +42,7 @@ public class ItemService {
 			dto.setItemName(item.getItemName());
 			dto.setItemPrice(item.getItemPrice());
 			dto.setItemQuantity(item.getItemQuantity());
+			dto.setImage(item.getImage());
 			if (item.getCart() != null) {
 				dto.setCartId(item.getCart().getId());
 			}
@@ -72,14 +73,17 @@ public class ItemService {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
 		Item existing = found.get();
-//		if (item.getItemName() != null) {
-//			existing.setItemName(item.getItemName());
-//		}
-//		if (item.getItemPrice() != null) {
-//			existing.setItemPrice(item.getItemPrice());
-//		}
+		if (item.getItemName() != null) {
+			existing.setItemName(item.getItemName());
+		}
+		if (item.getItemPrice() != null) {
+			existing.setItemPrice(item.getItemPrice());
+		}
 		if (item.getItemQuantity() != null) {
 			existing.setItemQuantity(item.getItemQuantity());
+		}
+		if (item.getImage() != null) {
+			existing.setImage(item.getImage());
 		}
 
 		Item updated = this.repo.save(existing);
@@ -93,6 +97,7 @@ public class ItemService {
 
 	}
 
+//Adding to cart
 	public ResponseEntity<Item> checkOut(int itemId, int cartId) {
 		Optional<Item> toCheckOut = this.repo.findById(itemId);
 
@@ -112,7 +117,6 @@ public class ItemService {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
 
-//		existing.setCart(customer.get());
 		existing.setCart(customer.get());
 
 		Item updated = this.repo.save(existing);
@@ -121,6 +125,7 @@ public class ItemService {
 
 	}
 
+//Remove from cart
 	public ResponseEntity<Item> checkIn(int itemId) {
 		Optional<Item> toCheckOut = this.repo.findById(itemId);
 
@@ -137,24 +142,6 @@ public class ItemService {
 		return ResponseEntity.ok(checkedIn);
 	}
 
-//	public ResponseEntity<Item> removeFromCart(int itemId,int cartId) {
-//	Optional<Item> itemToRemove = this.repo.findById(itemId);
-//
-//		if (itemToRemove.isEmpty()) {
-//			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
-//		}
-//
-//		Item existing = itemToRemove.get();
-//Optional<Cart> toUpdate=this.cartRepo.findById(cartId);
-//
-//if (toUpdate.isEmpty()) {
-//	return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
-//}
-//		existing.setCart(null);
-//
-//		Item checkedIn = this.repo.save(existing);
-//
-//		return ResponseEntity.ok(checkedIn);
-//	}
+//	
 
 }

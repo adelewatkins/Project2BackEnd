@@ -11,6 +11,7 @@ public class ItemDTO {
 	private Double itemPrice;
 
 	private Integer itemQuantity;
+	private String image;
 
 	private Integer cartId;
 
@@ -19,6 +20,7 @@ public class ItemDTO {
 		this.setId(item.getId());
 		this.setItemName(item.getItemName());
 		this.setItemPrice(item.getItemPrice());
+		this.setImage(item.getImage());
 		this.setItemQuantity(item.getItemQuantity());
 		if (item.getCart() != null) {
 			this.setCartId(item.getCart().getId());
@@ -67,6 +69,14 @@ public class ItemDTO {
 
 	public void setCartId(Integer cartId) {
 		this.cartId = cartId;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
