@@ -87,13 +87,14 @@ public class CartTest {
 
 	void addItemToCartTest() {
 		this.driver.get("http://localhost:3000/cart");
-		WebElement AddItem = this.driver.findElement(By.id("btn-addItem"));
+		WebElement AddItem = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div > div:nth-child(4) > div > div > div > div > div.card-text > button:nth-child(1)"));
 
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", AddItem);
 		this.driver.executeScript("arguments[0].click();", AddItem);
 
 		WebElement Add = this.driver.findElement(By.cssSelector(
-				"body > div > div:nth-child(3) > div > div > div:nth-child(1) > button.btn.btn-danger.col"));
+				"body > div > div:nth-child(3) > div:nth-child(4) > div:nth-child(1) > div > button:nth-child(3)"));
 
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", Add);
 		this.driver.executeScript("arguments[0].click();", Add);
@@ -112,9 +113,9 @@ public class CartTest {
 //
 //		this.driver.executeScript("arguments[0].scrollIntoView(true);", submit);
 //		this.driver.executeScript("arguments[0].click();", submit);
-		WebElement addedItem = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > p:nth-child(1)"));
-		assertEquals(true, addedItem.getText().contains("ID: 1"));
+		WebElement addedItem = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > div > p:nth-child(2)"));
+		assertEquals(true, addedItem.getText().contains("Cake"));
 
 	}
 
@@ -130,7 +131,8 @@ public class CartTest {
 		WebElement password = this.driver.findElement(By.id("formGroupPassword"));
 		password.sendKeys("treesa");
 
-		WebElement submit = this.driver.findElement(By.cssSelector("body > div > div.card > form > button"));
+		WebElement submit = this.driver
+				.findElement(By.cssSelector("body > div > div:nth-child(3) > div.card > form > button"));
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", submit);
 		this.driver.executeScript("arguments[0].click();", submit);
 
@@ -173,19 +175,19 @@ public class CartTest {
 		this.driver.executeScript("arguments[0].click();", selectButton);
 
 		WebElement plusButton = this.driver.findElement(By.cssSelector(
-				"body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > div > button:nth-child(2)"));
+				"body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > div > div > button:nth-child(2)"));
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", plusButton);
 		this.driver.executeScript("arguments[0].click();", plusButton);
 
-		WebElement UpdateItem = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > button:nth-child(3)"));
+		WebElement UpdateItem = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div > div:nth-child(11) > div:nth-child(1) > div > div > div > button:nth-child(4) > strong"));
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", UpdateItem);
 		this.driver.executeScript("arguments[0].click();", UpdateItem);
 
 		driver.switchTo().alert().accept();
 
 		WebElement newQuantity = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > div > p"));
+				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > div > div > p"));
 
 		Assertions.assertEquals("QUANTITY: 2", newQuantity.getText());
 

@@ -57,9 +57,9 @@ public class ItemTest {
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", submit);
 		this.driver.executeScript("arguments[0].click();", submit);
 
-		WebElement NewItem = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(3) > div > p:nth-child(2)"));
-		Assertions.assertEquals("ITEM : Biscuit", NewItem.getText());
+		WebElement NewItem = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div:nth-child(3) > div > div:nth-child(3) > div > div > p:nth-child(2)"));
+		Assertions.assertEquals("Biscuit", NewItem.getText());
 
 	}
 
@@ -68,13 +68,13 @@ public class ItemTest {
 	void getItems() {
 		this.driver.get("http://localhost:3000/item");
 
-		WebElement createdItemName = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(1) > div > p:nth-child(2)"));
-		Assertions.assertEquals("ITEM : Cake", createdItemName.getText());
+		WebElement createdItemName = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div:nth-child(3) > div > div:nth-child(1) > div > div > p:nth-child(2)"));
+		Assertions.assertEquals("Cake", createdItemName.getText());
 
-		WebElement createdPrice = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(1) > div > p:nth-child(3)"));
-		Assertions.assertEquals("PRICE: £5.99", createdPrice.getText());
+		WebElement createdPrice = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div:nth-child(3) > div > div:nth-child(1) > div > div > p:nth-child(3)"));
+		Assertions.assertEquals("£5.99", createdPrice.getText());
 
 	}
 
@@ -83,8 +83,8 @@ public class ItemTest {
 	void deleteItems() {
 		this.driver.get("http://localhost:3000/item");
 
-		WebElement Delete = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(1) > button:nth-child(4)"));
+		WebElement Delete = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div:nth-child(3) > div > div:nth-child(2) > div > button:nth-child(2)"));
 
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", Delete);
 		this.driver.executeScript("arguments[0].click();", Delete);
@@ -108,8 +108,8 @@ public class ItemTest {
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", Select);
 		this.driver.executeScript("arguments[0].click();", Select);
 
-		WebElement Delete = this.driver.findElement(
-				By.cssSelector("body > div > div:nth-child(3) > div > div:nth-child(11) > div > button:nth-child(4)"));
+		WebElement Delete = this.driver.findElement(By.cssSelector(
+				"body > div > div:nth-child(3) > div > div:nth-child(11) > div > div > button:nth-child(2)"));
 
 		this.driver.executeScript("arguments[0].scrollIntoView(true);", Delete);
 		this.driver.executeScript("arguments[0].click();", Delete);
@@ -124,7 +124,7 @@ public class ItemTest {
 		this.driver.get("http://localhost:3000/item");
 		WebElement CheckedInItem = this.driver
 				.findElement(By.cssSelector("body > div > div:nth-child(3) > div > div > div:nth-child(2) > div"));
-		assertEquals(true, CheckedInItem.getText().contains("ITEM : Cookies"));
+		assertEquals(true, CheckedInItem.getText().contains("Cookies"));
 	}
 
 	@AfterEach
